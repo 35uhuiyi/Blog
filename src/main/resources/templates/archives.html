@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="_fragments :: head(~{::title})">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>归档</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+    <link rel="stylesheet" href="../static/css/me.css">
+</head>
+<body>
+<script type="text/javascript" src="https://cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+    <!--导航-->
+    <nav th:replace="_fragments :: menu(4)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
+        <div class="ui container">
+            <div class="ui inverted secondary stackable menu">
+                <h2 class="ui teal header item">Blog</h2>
+                <a herf="#" class="m-item item m-mobile-hide"><i class="home icon"></i>首页</a>
+                <a herf="#" class="m-item item m-mobile-hide"><i class="idea icon"></i>分类</a>
+                <a herf="#" class="m-item item m-mobile-hide"><i class="tags icon"></i>标签</a>
+                <a herf="#" class="active m-item item m-mobile-hide"><i class="clone icon"></i>归档</a>
+                <a herf="#" class="m-item item m-mobile-hide"><i class="info icon"></i>关于我</a>
+                <div class="right m-item item m-mobile-hide">
+                    <div class="ui icon inverted transparent input">
+                        <input type="text" placeholder="Search......">
+                        <i class="search link icon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a href="#" class="ui menu toggle black icon button m-right-top m-mobile-show">
+            <i class="sidebar icon"></i>
+        </a>
+    </nav>
+
+    <!--中间内容-->
+    <div class="m-container-small m-padded-tb-big animated fadeIn">
+        <div class="ui container">
+            <div class="ui top attached padded segment">
+                <div class="ui middle aligned two column grid">
+                    <div class="column">
+                        <h3 class="ui teal header">归档</h3>
+                    </div>
+                    <div class="right aligned column">
+                        共 <h2 class="ui orange header center m-inline-block m-text-thin"> <span th:text="${blogCount}" >14</span> </h2> 篇博客
+                    </div>
+                </div>
+            </div>
+            <br/>
+
+
+            <th:block th:each="item : ${archiveMap}">
+                <h3 class="ui header center aligned m-teal"><span th:text="${#strings.substring(item.key,0,4)}">2017</span>年<span th:text="${#strings.substring(item.key,4,6)}">05</span>月</h3>
+            <div class="ui fluid vertical menu">
+                <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="item" th:each="blog: ${item.value}">
+                <span>
+                    <i class="mini teal circle icon"></i><span th:text="${blog.title}">关于刻意练习</span>
+                    <div class="ui basic teal left pointing label m-padded-mini"
+                    th:text="${#dates.format(blog.updateTime, 'MMMdd')}">9月03</div>
+                </span>
+                    <div class="ui basic orange left pointing label m-padded-mini" th:text="${blog.typeName}">原创</div>
+                </a>
+
+                <!--/*-->
+                <a href="#" target="_blank" class="item">
+                <span>
+                    <i class="mini teal circle icon"></i>关于刻意练习
+                    <div class="ui basic teal left pointing label m-padded-mini">9月03</div>
+                </span>
+                    <div class="ui basic orange left pointing label m-padded-mini">原创</div>
+                </a>
+                <a href="#" target="_blank" class="item">
+                <span>
+                    <i class="mini teal circle icon"></i>关于刻意练习
+                    <div class="ui basic teal left pointing label m-padded-mini">9月03</div>
+                </span>
+                    <div class="ui basic orange left pointing label m-padded-mini">原创</div>
+                </a>
+                <!--*/-->
+            </div>
+            </th:block>
+
+
+        </div>
+    </div>
+    <br>
+    <br>
+    <!--尾部-->
+    <footer th:replace="_fragments :: footer">
+    </footer>
+<script>
+    $('.menu.toggle').click(function () {
+        $('.m-item').toggleClass('m-mobile-hide');
+    });
+</script>
+<script th:inline="javascript">
+    $("#newblogs-container").load(/*[[@{/footer/newblogs}]]*/"/footer/newblogs");
+    $("#blog-message").load(/*[[@{/footer/blogMessage}]]*/"/footer/blogMessage");
+</script>
+<script>  //博客运行时间
+function secondToDate(second) {
+    if (!second) {
+        return 0;
+    }
+    var time = new Array(0, 0, 0, 0, 0);
+    if (second >= 365 * 24 * 3600) {
+        time[0] = parseInt(second / (365 * 24 * 3600));
+        second %= 365 * 24 * 3600;
+    }
+    if (second >= 24 * 3600) {
+        time[1] = parseInt(second / (24 * 3600));
+        second %= 24 * 3600;
+    }
+    if (second >= 3600) {
+        time[2] = parseInt(second / 3600);
+        second %= 3600;
+    }
+    if (second >= 60) {
+        time[3] = parseInt(second / 60);
+        second %= 60;
+    }
+    if (second > 0) {
+        time[4] = second;
+    }
+    return time;
+}
+function setTime() {
+    /*此处为网站的创建时间*/
+    var create_time = Math.round(new Date(Date.UTC(2021, 0, 22, 0, 0, 0)).getTime() / 1000);
+    var timestamp = Math.round((new Date().getTime() + 8 * 60 * 60 * 1000) / 1000);
+    currentTime = secondToDate((timestamp - create_time));
+    currentTimeHtml = currentTime[0] + '年' + currentTime[1] + '天'
+        + currentTime[2] + '时' + currentTime[3] + '分' + currentTime[4]
+        + '秒';
+    document.getElementById("Runtime").innerHTML = currentTimeHtml;
+}
+setInterval(setTime, 1000);
+</script>
+</body>
+</html>

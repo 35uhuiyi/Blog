@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ny.dao.CommentDao">
+
+    <delete id="deleteComment">
+        DELETE FROM blog.t_comment WHERE id=#{id} OR parent_comment_id=#{id}
+    </delete>
+
+    <delete id="deleteCommentByBlogId">
+        DELETE FROM blog.t_comment where blog_id=#{id}
+    </delete>
+
+    <insert id="saveComment" parameterType="com.ny.po.Comment">
+        INSERT into blog.t_comment
+        (nickname, email, content, avatar, create_time, blog_id, parent_comment_id, admin_comment)
+        VALUES
+        (#{nickname}, #{email}, #{content}, #{avatar}, #{createTime}, #{blogId}, #{parentCommentId},
+        #{adminComment})
+    </insert>
+
+    <select id="findByBlogIdParentIdNull" resultType="com.ny.po.Comment">
+        SELECT *
+        FROM blog.t_comment c
+        WHERE c.blog_id = #{blogId} and c.parent_comment_id = #{blogParentId}
+        ORDER BY c.create_time DESC
+    </select>
+
+    <!--一级评论，第一个回复评论-->
+    <select id="findByBlogIdParentIdNotNull" resultType="com.ny.po.Comment">
+        SELECT *
+        FROM blog.t_comment c
+        WHERE c.blog_id = #{blogId} and c.parent_comment_id =#{id}
+        ORDER BY c.create_time DESC
+    </select>
+
+    <select id="findByBlogIdAndReplayId" resultType="com.ny.po.Comment">
+        select *
+        from blog.t_comment c
+        where c.blog_id = #{blogId} and c.parent_comment_id = #{childId}
+        order by c.create_time desc
+    </select>
+
+    <select id="getCommentTotal" resultType="Integer">
+        select count(*) from t_comment
+    </select>
+
+</mapper>

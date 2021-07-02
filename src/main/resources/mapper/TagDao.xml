@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ny.dao.TagDao">
+
+    <!--新增保存标签-->
+    <insert id="saveTag" parameterType="com.ny.po.Tag">
+        INSERT INTO blog.t_tag VALUES (#{id}, #{name})
+    </insert>
+
+    <!--根据id查询标签-->
+    <select id="getTag" resultType="com.ny.po.Tag">
+        SELECT id, name FROM blog.t_tag WHERE id=#{id}
+    </select>
+
+    <!--根据name查询-->
+    <select id="getTagByName" resultType="com.ny.po.Tag">
+        SELECT * FROM blog.t_tag WHERE name = #{name}
+    </select>
+
+    <!--获取所有标签-->
+    <select id="getAllTag" resultType="com.ny.po.Tag">
+        SELECT * FROM blog.t_tag
+    </select>
+
+    <resultMap id="tags" type="com.ny.po.Tag">
+        <id property="id" column="tid"/>
+        <result property="name" column="name"/>
+        <collection property="blogs" ofType="com.ny.po.Blog">
+            <id property="id" column="bid"/>
+            <result property="title" column="title"/>
+        </collection>
+    </resultMap>
+
+    <select id="getBlogTag" resultMap="tags">
+        select t.id tid, t.name, b.id bid, b.title
+        FROM t_tag t,t_blog b, t_blog_tags bt
+        WHERE t.id = bt.tag_id and b.id = bt.blog_id
+    </select>
+
+    <delete id="deleteTag">
+        delete FROM blog.t_tag WHERE id = #{id}
+    </delete>
+
+    <update id="updateTag" parameterType="com.ny.po.Tag">
+        UPDATE blog.t_tag set name = #{name} WHERE id= #{id}
+    </update>
+
+
+</mapper>

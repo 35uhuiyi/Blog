@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="admin/_fragments :: head(~{::title})">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>标签新增</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+    <link rel="stylesheet" href="../../static/css/me.css">
+    <link rel="stylesheet" href="../../static/lib/editormd/css/editormd.min.css">
+</head>
+<body>
+<!--/*/<th:block th:replace="admin/_fragments :: script">/*/-->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+    <script src="../../static/lib/editormd/editormd.min.js"></script>
+<!--/*/</th:block>/*/-->
+    <!--导航-->
+    <nav th:replace="admin/_fragments :: menu(2)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
+        <div class="ui container">
+            <div class="ui inverted secondary stackable menu">
+                <h2 class="ui teal header item">管理后台</h2>
+                <a herf="#" class="m-item item m-mobile-hide"><i class="home icon"></i>博客</a>
+                <a herf="#" class="m-item item m-mobile-hide"><i class="idea icon"></i>分类</a>
+                <a herf="#" class="m-item item m-mobile-hide"><i class="tags icon"></i>标签</a>
+                <div class="right m-item m-mobile-hide menu">
+                    <div class="ui dropdown item">
+                        <div class="text">
+                            <img src="https://unsplash.it/100/100/?image=1005" alt="" class="ui avatar image">
+                            NingYang
+                        </div>
+                        <i class="dropdown icon"></i>
+                        <div class="menu">
+                            <a href="#" class="item">注销</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a href="#" class="ui menu toggle black icon button m-right-top m-mobile-show">
+            <i class="sidebar icon"></i>
+        </a>
+    </nav>
+    <div class="ui attached pointing menu">
+        <div class="ui container">
+            <div class="right menu">
+                <a href="#" th:href="@{/admin/tags/input}" class="active teal item">新增</a>
+                <a href="#" th:href="@{/admin/tags}" class="item">列表</a>
+            </div>
+        </div>
+    </div>
+
+    <!--中间内容-->
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="m-container-small m-padded-tb-big">
+        <div class="ui container">
+            <form id="tag-form" action="#" th:object="${tag}" th:action="*{id}==null ? @{/admin/tags} : @{/admin/tags/{id}(id=*{id})}" method="post" class="ui form">
+                <input type="hidden" name="id" th:value="*{id}">
+                <!--required不通过时可以标红-->
+                <div class="required field">
+                    <div class="ui left labeled input">
+                        <label class="ui teal basic label">名称</label>
+                        <input type="text" name="name" placeholder="标签名称" th:value="*{name}">
+                    </div>
+                </div>
+                <div class="ui error message"></div>
+                <div class="ui mini negative message" th:unless="${#strings.isEmpty(msg)}" th:text="|提示： ${msg}">提示：不能添加重复的标签</div>
+                <div class="ui right aligned container">
+                    <button type="button" class="ui button" onclick="window.history.go(-1)">返回</button>
+                    <button type="button" id="sub-btn" class="ui teal button">提交</button>
+                    <!--button在h5标准中默认的type属性为submit，导致按钮被点击后，会触发表单的submit事件，所以出现两次提交.-->
+                </div>
+            </form>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <!--尾部-->
+
+<script>
+    $('.menu.toggle').click(function () {
+        $('.m-item').toggleClass('m-mobile-hide');
+    });
+    $('.ui.dropdown').dropdown({
+        on: 'hover'
+    });
+    $('.ui.form').form({
+        fields:{
+            title: {
+                identifier: 'name',
+                rules:[{
+                    type: 'empty',
+                    prompt:'请输入分类名称'
+                }]
+            }
+        }
+    });
+    $('#sub-btn').click(function () {
+        $('#tag-form').submit();
+    });
+</script>
+</body>
+</html>

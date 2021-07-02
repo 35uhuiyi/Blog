@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ny.dao.BlogDao">
+
+    <!--结果集映射-->
+    <!--把查询到的结果映射到type中的pojo-->
+    <resultMap id="User" type="com.ny.po.User">
+        <id property="id" column="id"/>
+        <result property="nickname" column="nickname"/>
+        <result property="username" column="username"/>
+        <result property="email" column="email"/>
+        <result property="avatar" column="avatar"/>
+    </resultMap>
+
+    <!--collection属性(一对多关系结果集映射)和association属性(多对一关系结果集映射)-->
+    <resultMap id="blog" type="com.ny.queryvo.BlogQuery">
+        <id property="id" column="id"/>
+        <result property="title" column="title"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="recommended" column="recommended"/>
+        <result property="published" column="published"/>
+        <result property="typeId" column="type_id"/>
+        <!--多个BlogQuery对应一个type-->
+        <association property="type" javaType="com.ny.po.Type">
+            <id property="id" column="id"/>
+            <result property="name" column="name"/>
+        </association>
+    </resultMap>
+
+    <!--新增保存文章-->
+    <insert id="saveBlog" parameterType="com.ny.po.Blog" useGeneratedKeys="true" keyProperty="id">
+        INSERT into blog.t_blog (title,content,first_picture,flag,
+         views,appreciation,share_statement,commentabled,published,
+         recommended,create_time,update_time,type_id,user_id,description,tag_ids)
+         VALUES
+         (#{title},#{content},#{firstPicture},#{flag},
+         #{views},#{appreciation},#{shareStatement},#{commentabled},#{published},
+         #{recommended},#{createTime},#{updateTime},#{typeId},#{userId}, #{description},#{tagIds})
+    </insert>
+
+    <!--查询所有文章-->
+    <select id="getAllBlog" resultType="com.ny.po.Blog">
+        select * FROM blog.t_blog
+    </select>
+
+    <!--查询文章管理列表-->
+    <select id="getAllBlogQuery" resultMap="blog">
+        SELECT b.id,b.title,b.update_time,b.recommended,b.published,b.type_id,t.id,t.name
+        FROM blog.t_blog b left OUTER JOIN
+        blog.t_type t on b.type_id = t.id ORDER BY b.update_time DESC
+    </select>
+
+
+    <!--根据typeId查询博客-->
+    <select id="getBlogByTypeId" resultType="java.lang.Long">
+        SELECT b.id
+        FROM blog.t_blog b, blog.t_type t
+        WHERE b.type_id = t.id and type_id = #{typeId}
+        order BY b.update_time desc
+    </select>
+
+
+    <!--根据tagId查询-->
+    <select id="getBlogByTagId" resultType="java.lang.Long">
+        SELECT b.id
+        FROM blog.t_blog b, t_tag t, t_blog_tags tb
+        WHERE tb.blog_id = b.id and tb.tag_id = t.id and t.id = #{tagId}
+        ORDER  by b.update_time DESC
+    </select>
+
+
+    <!--删除文章-->
+    <delete id="deleteBlog">
+        delete from blog.t_blog WHERE id = #{id}
+    </delete>
+
+    <resultMap id="showblog" type="com.ny.queryvo.ShowBlog">
+        <id property="id" column="id"/>
+        <result property="flag" column="flag"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="typeId" column="type_id"/>
+        <result property="firstPicture" column="first_picture"/>
+        <result property="description" column="description"/>
+        <result property="recommended" column="recommended"/>
+        <result property="published" column="published"/>
+        <result property="shareStatement" column="share_statement"/>
+        <result property="appreciation" column="appreciation"/>
+        <result property="commentabled" column="commentabled"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="tagIds" column="tag_ids"/>
+        <!--<collection property="tags" ofType="com.ny.po.Tag">-->
+            <!--<id property="id" column="id"/>-->
+            <!--<result property="name" column="name"/>-->
+        <!--</collection>-->
+    </resultMap>
+
+
+    <!--查询编辑修改文章-->
+    <select id="getBlogById" resultMap="showblog">
+        SELECT
+        b.id,b.flag,b.title,b.content,b.type_id,b.first_picture,b.description,b.recommended,b.published,
+        b.share_statement,b.appreciation,b.commentabled, b.tag_ids
+        FROM blog.t_blog b
+        WHERE b.id = #{id};
+    </select>
+
+    <!--编辑修改文章-->
+    <update id="updateBlog" parameterType="com.ny.queryvo.ShowBlog">
+        UPDATE blog.t_blog  set published = #{published},flag = #{flag},title = #{title},
+          content = #{content}, type_id = #{typeId}, first_picture = #{firstPicture}, description = #{description},
+          recommended = #{recommended}, share_statement = #{shareStatement},commentabled = #{commentabled},
+          appreciation = #{appreciation}, update_time = #{updateTime}, tag_ids = #{tagIds}
+        WHERE id = #{id};
+    </update>
+
+
+    <!-- <！接口传入的值在pattern变量中，然后把传入的值拼接成"'%'+pattern+'%'"形式，放入namePattern参数中&ndash;&gt;-->
+    <select id="searchByTitleOrTypeOrRecommend" parameterType="com.ny.queryvo.SearchBlog"
+            resultMap="blog">
+        <bind name="pattern" value="'%' + title + '%'"/>
+        SELECT b.id,b.title,b.update_time,b.recommended,b.type_id,t.id,t.name
+        FROM blog.t_blog b, blog.t_type t
+        <where>
+            <if test="1==1">
+                b.type_id = t.id
+            </if>
+            <if test="typeId != null">
+                and b.type_id = #{typeId}
+            </if>
+            <if test="title != null">
+                and b.title like #{pattern}
+            </if>
+        </where>
+    </select>
+
+
+    <resultMap id="firstPageBlog" type="com.ny.queryvo.FirstPageBlog">
+        <id property="id" column="id"/>
+        <result property="title" column="title"/>
+        <result property="firstPicture" column="first_picture"/>
+        <result property="views" column="views"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="description" column="description"/>
+        <result property="typeName" column="name"/>
+        <result property="nickname" column="nickname"/>
+        <result property="avatar" column="avatar"/>
+        <result property="Tagids" column="btids"/>
+    </resultMap>
+
+
+    <select id="getSumNum" resultType="java.lang.Integer">
+        SELECT count(*) from t_blog
+    </select>
+
+
+    <!--查询首页展示博客列表-->
+    <select id="getFirstPageBlog" resultMap="firstPageBlog">
+        select b.id,b.title,b.first_picture,b.views,b.update_time,b.description,
+        t.name,u.nickname,u.avatar
+        FROM
+        blog.t_blog b,blog.t_type t,blog.t_user u
+        WHERE
+        b.type_id = t.id and u.id = b.user_id AND b.`published`=1 order by b.update_time DESC
+    </select>
+
+    <resultMap id="recommendBlog" type="com.ny.queryvo.RecommendBlog">
+        <id property="id" column="id"/>
+        <result property="title" column="title"/>
+        <result property="recommended" column="recommended"/>
+        <result property="firstPicture" column="first_picture"/>
+    </resultMap>
+
+    <!--推荐文章-->
+    <select id="getAllRecommendBlog" resultMap="recommendBlog">
+        SELECT * FROM blog.t_blog b WHERE b.recommended = TRUE ORDER by
+        b.update_time DESC LIMIT 0, 5
+    </select>
+
+    <!--搜索文章-->
+    <select id="getSearchBlog" resultMap="firstPageBlog">
+        <bind name="pattern" value="'%'+ query+'%'"/>
+        SELECT DISTINCT b.id,b.title,b.first_picture,b.views,b.update_time,b.description,
+        t_type.name,u.nickname,u.avatar, b.tag_ids btids
+        FROM
+        t_blog b,t_type,t_user u,t_blog_tags tb,t_tag
+        WHERE
+        tb.blog_id = b.id AND tb.tag_id = t_tag.id AND
+        b.type_id = t_type.id AND u.id = b.user_id AND (b.title LIKE #{pattern} OR
+        b.content LIKE #{pattern} OR b.description LIKE #{pattern} OR t_type.name LIKE #{pattern})
+        order BY b.update_time DESC
+    </select>
+
+
+
+    <resultMap id="detailBlog" type="com.ny.queryvo.DetailedBlog">
+        <id property="id" column="id"/>
+        <result property="firstPicture" column="first_picture"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="typeName" column="name"/>
+        <result property="views" column="views"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="commentabled" column="commentabled"/>
+        <result property="shareStatement" column="share_statement"/>
+        <result property="appreciation" column="appreciation"/>
+        <result property="nickname" column="nickname"/>
+        <result property="avatar" column="avatar"/>
+        <result property="tagIds" column="ids"/>
+    </resultMap>
+
+    <!--查询博客详情-->
+    <select id="getDetailedBlog" resultMap="detailBlog">
+        SELECT b.id,b.first_picture,b.title,b.content,b.views,b.update_time,
+        b.commentabled,b.share_statement,b.appreciation,t.name,u.avatar,u.nickname,b.`tag_ids` ids
+        FROM
+        blog.t_user u,blog.t_type t,blog.t_blog b
+        WHERE
+        b.user_id = u.id AND b.type_id = t.id AND b.id = #{id}
+    </select>
+
+
+    <!--文章访问自增-->
+    <update id="updateViews">
+        UPDATE blog.t_blog b set b.views  = b.views+1 WHERE b.id = #{id}
+    </update>
+
+
+    <!--分类页面查询-->
+    <select id="getByTypeId" resultMap="firstPageBlog">
+        SELECT b.id,b.title,b.first_picture,b.views,b.update_time,b.description,
+        t.name,
+        u.nickname,u.avatar
+        FROM blog.t_blog b, blog.t_type t,blog.t_user u
+        WHERE b.type_id = t.id and u.id = b.user_id and type_id = #{typeId}
+        order BY b.update_time desc
+    </select>
+
+    <!--标签页面查询-->
+    <select id="getByTagId" resultMap="firstPageBlog">
+        SELECT b.id,b.title,b.first_picture,b.views,b.update_time,b.description,
+        t_type.name,
+        u.nickname,u.avatar, b.tag_ids btids
+        FROM blog.t_blog b, t_tag t,t_user u, t_blog_tags tb, t_type
+        WHERE tb.blog_id = b.id AND tb.tag_id = t.id  AND u.id = b.user_id AND b.type_id=t_type.id AND t.id = #{tagId}
+        ORDER BY b.update_time DESC
+    </select>
+
+
+    <insert id="saveBlogAndTag" parameterType="BlogAndTag">
+        insert into t_blog_tags (tag_id, blog_id) values (#{tagId}, #{blogId});
+    </insert>
+
+
+    <delete id="deleteBlogAndTag">
+        DELETE from blog.t_blog_tags WHERE blog_id = #{blogId}
+    </delete>
+
+    <!--统计博客信息-->
+    <select id="getBlogTotal" resultType="Integer">
+        SELECT count(*) FROM blog.t_blog
+    </select>
+
+    <select id="getBlogViewTotal" resultType="Integer">
+        SELECT sum(views) FROM t_blog
+    </select>
+
+
+    <!--查询所有的年月份-->
+    <select id="findGroupYearAndMonth" resultType="String">
+        SELECT DATE_FORMAT(b.update_time, '%Y%m') FROM t_blog b ORDER BY b.update_time DESC
+    </select>
+
+    <!--根据年月份查询-->
+    <select id="findByYearAndMonth" resultMap="firstPageBlog">
+        SELECT b.title, b.update_time, b.id, t.name
+        FROM t_blog b,t_type t
+        WHERE DATE_FORMAT(b.update_time, "%Y%m") = #{yam} AND t.id=b.type_id
+    </select>
+
+    <!--查询最新的三条博客-->
+    <select id="getThreeNewBlogs" resultMap="blog">
+        SELECT b.id, b.title FROM blog.t_blog b ORDER BY b.update_time DESC LIMIT 0, 3
+    </select>
+
+</mapper>

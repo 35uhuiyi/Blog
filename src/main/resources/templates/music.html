@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="_fragments :: head(~{::title})">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>音乐盒</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+    <link rel="stylesheet" href="../static/lib/music/css/zplayer.min.css"/>
+    <link rel="stylesheet" href="../static/css/me.css">
+</head>
+<body>
+<script type="text/javascript" src="https://cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script type="text/javascript" src="../static/lib/music/js/zplayer.min.js"/>
+    <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+<th:block th:replace="_fragments :: script">
+</th:block>
+    <!--导航-->
+    <nav th:replace="_fragments :: menu(7)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
+    </nav>
+
+
+<div  style="width: 100%;height: 10%">
+</div>
+    <!--中间内容-->
+    <div style="height:70%" align="center" >
+        <div class="ui container">
+            <div id="player2"></div>
+        </div>
+    </div>
+
+    <!--尾部-->
+    <footer th:replace="_fragments :: footer" class="ui inverted vertical segment m-padded-tb-massive">
+    </footer>
+
+
+
+<script>
+    var zp2 = new zplayer({
+        element: document.getElementById("player2"),
+        lrcStart: 1,/*是否开启歌词功能 ，默认false（为true时musics集合中需要传入lrc字段。）*/
+        musics: [{
+            title: "四季予你",
+            author: "程响",
+            url: "http://music.163.com/song/media/outer/url?id=1807537867.mp3",
+            pic: "http://p2.music.126.net/k5r1GC-erKK4WcDmzyrsIw==/109951165648878421.jpg?param=300y300",
+            lrc: "[00:01.44]编曲：刘圣华（华子）[00:06.69]送你三月的风 六月的雨 九月的风景[00:13.36]让我余生都有关于你[00:34.45]只如 初见 回忆却在蔓延[00:47.85]就像夜晚的甜点[00:53.41]连我的梦境 都变甘甜[01:01.55]我愿意为你放弃曾经那些年少轻狂[01:05.02]不去再管所谓流浪或者远方[01:08.15]只想在你身旁把这情歌慢慢唱[01:14.05]送你三月的风 六月的雨 九月的风景[01:20.86]大雪漫天飘零 做你的嫁衣 多美丽[01:28.07]送你每个梦境 每次清醒 陪伴的长情[01:34.36]让我余生都有关于你[01:55.20]我愿意为你放弃曾经那些年少轻狂[01:58.97]不去再管所谓流浪或者远方[02:02.41]只想在你身旁把这情歌慢慢唱[02:08.20]送你三月的风 六月的雨 九月的风景[02:14.94]大雪漫天飘零 做你的嫁衣 多美丽[02:22.15]送你每个梦境 每次清醒 陪伴的长情[02:28.42]让我余生都有关于你[02:39.80]嘿 耶一耶[02:45.37]送你三月的风 六月的雨 九月的风景[02:52.12]大雪漫天飘零 做你的嫁衣 多美丽[02:59.31]送你每个梦境 每次清醒 陪伴的长情[03:05.49]让我余生都有关于你[03:12.35]送你三月的风 六月的雨 九月的风景[03:19.01]大雪漫天飘零 做你的嫁衣 多美丽[03:26.45]如果岁月无情 你我老去 所有都渐渐忘记[03:33.39]我会把你姓名刻心底[03:39.82]因为你是此生的唯一[04:02.28]吉他：许鹏[04:02.71]混音：王朋[04:02.91]母带：全相彦[04:03.13]视觉插画：华玮轩[04:03.81]文案：冷小婧[04:04.32]宣发：刘芳[04:04.74]出品人：潘鸿业[04:05.33]OP：北京金翼龙国际文化传媒有限公司[04:05.63]「未经著作权人书面许可 不得以任何方式（包括翻唱、翻录等）使用」[re:Made by LrcHelper @https://github.com/ludoux/lrchelper][ve:2.2.0.0]"
+        }, {
+            title:"星辰大海",
+            author:"黄霄雲",
+            url: "http://music.163.com/song/media/outer/url?id=1811921555.mp3",
+            pic:"http://p2.music.126.net/9BgjaSNM9Bmkh5waahv_gQ==/109951165628223126.jpg?param=300y300",
+            lrc:"[00:15.58]我愿变成一颗恒星[00:20.90]守护海底的蜂鸣[00:26.51]It's my dream it's magic[00:29.56]照亮你的心[00:32.18]To your eyes 有多远的距离[00:37.73]穿过人海 别停下来[00:40.82]趁现在还有期待[00:46.39]会不会我们的爱[00:49.67]会被风吹向大海[00:53.36]不再回来[00:56.87]每当你向我走来[01:00.94]告诉我星辰大海[01:15.18]遥遥微光 与我同行[01:17.84]盛开在黎明[01:20.66]To your eyes 有多远的距离[01:26.40]穿过人海 别停下来[01:29.36]趁现在还有期待[01:34.99]会不会我们的爱[01:38.87]会被风吹向大海[01:41.64]不再回来[01:45.80]每当你向我走来[01:49.48]告诉我星辰大海[02:15.98]趁现在还有期待[02:20.41]会不会我们的爱[02:24.24]会被风吹向大海[02:27.41]不再回来[02:31.91]每当你向我走来[02:35.78]告诉我星辰大海[02:43.57]会不会我们的爱[02:46.47]像星辰守护大海[02:50.38]不曾离开[02:54.79]我向你奔赴而来[02:57.89]你就是星辰大海[03:11.93]我眼中炽热的恒星[03:18.35]长夜里照我前行[re:Made by LrcHelper @https://github.com/ludoux/lrchelper][ve:2.2.0.0]"
+
+        },{
+            title:"坠",
+            author:"房子帆",
+            url: "http://music.163.com/song/media/outer/url?id=1808326361.mp3",
+            pic:"http://p2.music.126.net/xAnbHLHJrysXUytGqvT4pQ==/109951165593179176.jpg?param=300y300",
+            lrc:"[00:07.44]编录混：房子帆[00:15.51]想说的话 全都努力放在了脚下[00:23.31]那些难堪的卑微的全部都要放下[00:29.80]要走的话 其实对我来说不算惊讶[00:36.57]我可以歇斯底里避免了尴尬[00:43.58]看着我追 我坠到海里变雨滴[00:46.70]看着我坠 我追不到你的美丽[00:50.71]我恐惧 我喜剧 我无趣 我变虚拟[00:57.24]看着我退 我颓废到你隔壁[01:00.74]看着我退 我颓废到你恐惧[01:37.85]想好了吗 省略那些敷衍说的话[01:45.12]那些惦记的顾虑的气味让我害怕[01:51.89]不用回答 这不过是我眷恋的惩罚[01:58.91]我已经可以好好自己的抚去伤疤[02:05.68]看着我坠 我追到海里变雨滴[02:09.44]看着我坠 我追不到你的美丽[02:12.95]我恐惧 我喜剧 我无趣 我变虚拟[02:19.73]看着我退 我颓废到你隔壁[02:22.99]看着我退 颓废到你恐惧[02:33.78]你说你走 他偏要留[02:36.86]你为人顾虑 我很担忧[02:40.62]我想要你看我 永远都别走[02:47.64]你说你走 他偏要留[02:50.90]死而复还 又是一宿[02:54.42]我想要你看我 永远都别走[03:01.19]看着我坠 我追到海里变雨滴[03:04.45]看着我坠 我追不到你的美丽[03:08.21]我恐惧 我喜剧 我无趣 我变虚拟[03:14.98]看着我退 我颓废到你隔壁[03:17.99]看着我退 颓废到你恐惧[re:Made by LrcHelper @https://github.com/ludoux/lrchelper][ve:2.2.0.0]"
+
+        },{
+            title:"把回忆拼好给你",
+            author:"王贰浪",
+            url: "http://music.163.com/song/media/outer/url?id=1403318151.mp3",
+            pic:"http://p2.music.126.net/CBx2K_jEN3SNWwYztagPPw==/109951164485969446.jpg?param=300y300",
+            lrc:"[00:02.12]采样曲：願い~あの頃のキミへ~[00:12.15]中文填词：一只然[00:15.23]OP（原属词曲版权公司）：テレビ東京ミュージック 东京电视台音乐[00:19.49]本作品经过原词曲作者以及版权公司授权[00:22.61][00:27.80]我们之间的回忆[00:30.55]全部都小心地收集[00:33.67]我总是偷偷地哭泣[00:36.56]像倦鸟失了归期[00:39.60][00:39.87]但愿我相信的爱情[00:42.52]结局紧握在我手心[00:45.30]时光匆匆却没有遗失过去[00:53.22][00:55.25]希望我们 有光明的未来[00:58.02]还有能够装下星空的期待[01:00.93]可现实为何让我感到如此懈怠[01:04.05]总怀念相遇时我们无视落叶和人海[01:07.38][01:07.66]是你让我勇敢不再像颗尘埃[01:10.38]是你常帮我照料装着梦的盆栽[01:13.25]每一天我们都是如此愉快[01:16.05]一直到天色渐晚看着落日无奈离开[01:19.43][01:19.65]我知道你爱集邮爱笑甚至爱发呆[01:22.39]我知道你怕草虫还有夜晚的妖怪[01:25.35]我喜欢你有一点心不在焉的状态[01:28.53]看起来像个回到七岁时候的小孩[01:31.37][01:31.64]该如何将我这份感情向你告白[01:34.12]喜欢却又不敢爱[01:35.69]直到整个宇宙[01:37.57]在为我焦虑失神慌张之中醒来[01:40.33]就像是黑暗过后黎明盛开[01:43.08][01:43.35]我们之间的回忆[01:45.47]全部都小心地收集[01:48.39]我总是偷偷地哭泣[01:51.47]像倦鸟失了归期[01:54.29]但愿我相信的爱情[01:57.28]结局紧握在我手心[02:00.32]时光匆匆却没有遗失过去[02:07.93][02:18.74]那天你在雨后街角答应接受我的爱[02:22.39]那一刻我的世界有了色彩[02:25.33]这一生无法忘记关于澄蓝色的你[02:28.37]像一份礼物悄然呈现在我的境遇[02:31.22]我们从清晨起玩一整天游戏[02:34.37]到夜晚一起看我最爱的剧[02:37.38]能够拥有这些已足够幸运[02:40.21]我已经不再期待其他什么东西[02:43.38][02:43.67]我们也经常争执互相不接电话[02:46.45]在同一房间终于呼叫冷漠抵达[02:49.36]也曾想过以后生活没有人牵挂[02:52.19]把爱扔掉只剩一块残酷伤疤[02:55.38][02:55.67]而那些你送我的梦，教我折的花[02:58.82]逃亡的盛夏[03:00.28]在夜空隐没之际为我点燃烟花[03:02.99]寂寞时让我把快乐拼起来吧[03:06.23][03:06.51]我们之间的回忆[03:09.37]全部都小心地收集[03:12.31]我总是偷偷地哭泣[03:15.32]像倦鸟失了归期[03:18.29]但愿我相信的爱情[03:21.23]结局紧握在我手心[03:24.23]时光匆匆却没有遗失过去[03:30.04][03:30.87]我们可以就像是孩子一样成长[03:36.49]永远无所畏惧义无反顾向着未知的前方[03:42.64]原来我们每天努力长成看似大人的模样[03:48.73]为了可以一起跨越山和海洋[03:54.08]那时的我每天都祈祷 实现这个梦想[04:01.51][04:01.82]现在的你还好吗[04:03.85]是否还会像从前一样的爱笑[04:07.42]现在的你还好吗[04:09.73]当你径直在我面前坦言放下[04:13.32]现在的你还好吗[04:15.63]是否像从前一样有无限的温柔啊[04:19.45]现在的你还好吗[04:22.42]愿你能保持月亮般的心，要爱自己啊[04:27.60][04:27.80]我们之间的回忆[04:30.28]全部都小心地收集[04:33.29]我总是偷偷地哭泣[04:36.28]像倦鸟失了归期[04:39.31][04:39.58]但愿我相信的爱情[04:42.12]结局紧握在我手心[04:45.06]时光匆匆却没有遗失过去[04:51.66][04:51.92]独自收集两个人之间的回忆[04:54.63]即使每当到这时候我都会哭泣[04:57.61]为何一切，变得如此，无法回到过去[05:03.72][05:03.99]但我仍愿意感谢你给过我爱情[05:06.56]每一场风景都是我们爱的证明[05:09.66]就算如今，天各一方，祝你余生动听啊[05:15.75][05:15.90]独自收集两个人之间的回忆[05:18.60]即使每当到这时候我都会哭泣[05:21.82]为何一切，变得如此，无法回到过去[05:27.57][05:27.80]但我仍愿意感谢你给过我爱情[05:30.63]每一场风景都是我们爱的证明[05:33.61]就算如今，天各一方，把回忆拼好给你[05:47.62][05:50.50]企划：谢宇航 / 牛雪吟 / 裘小静[05:55.04]制作人：王佳依[05:58.38]监制：姚政[06:01.98]编曲：闫津[06:04.51]录音：陈程[06:08.38]缩混：陈程[06:11.35]封面设计：刘馨宇[06:15.65]网易云音乐特别企划“听，海风”[06:18.00][99:00.01]本歌曲来自〖网易音乐人〗[99:00.02]10亿现金激励，千亿流量扶持！[99:00.03]合作：st399@vip.163.com[re:Made by LrcHelper @https://github.com/ludoux/lrchelper][ve:2.2.0.0]"
+        },{
+            title:"这一生关于你的风景",
+            author:"枯木逢春",
+            url: "http://music.163.com/song/media/outer/url?id=1356350562.mp3",
+            pic:"http://p2.music.126.net/415A5Xt3bUegx4vyiY8dNQ==/109951164821961505.jpg?param=300y300",
+            lrc:"[00:05.62][00:10.44][00:12.84]编曲：查无此人[00:15.42]吉他：唐正楠[00:17.72]录音： 1090 Studio 成都[00:20.25]混音：一刀流[00:22.70]监制：317[00:25.22]发行：叁七7SEVEN[00:30.24]远方灯火闪亮着光[00:35.90]你一人低头在路上[00:40.14]这城市越大越让人心慌[00:44.15]多向往[00:46.47]多漫长[00:50.10]这一路经历太多伤[00:54.84]把最初笑容都淡忘[00:59.44]时光让我们变得脆弱且坚强[01:03.67]让我再来轻轻对你唱[01:08.35]我多想 能多陪你一场[01:13.55]把前半生的风景对你讲[01:18.30]在每个寂静的夜里我会想[01:22.90]那些关于你的爱恨情长[01:28.15]我也想 能够把你照亮[01:32.69]在你的生命中留下阳光[01:37.74]陪你走过那山高水长[01:42.82]陪你一起生长[02:27.22]这一路经历太多伤[02:32.47]把最初笑容都淡忘[02:37.27]时光让我们变得脆弱且坚强[02:41.60]让我再来轻轻对你唱[02:46.45]我多想 能多陪你一场[02:51.50]把前半生的风景对你讲[02:56.17]在每个寂静的夜里我会想[03:00.96]那些关于你的爱恨情长[03:06.88]我也想 能够把你照亮[03:10.65]在你的生命中留下阳光[03:15.89]陪你走过那山高水长[03:20.84]陪你一起生长[03:26.12]我多想 能多陪你一场[03:30.47]把前半生的风景对你讲[03:35.30]在每个寂静的夜里我会想[03:39.90]那些关于你的爱恨情长[03:45.37]我也想 能够把你照亮[03:49.82]在你的生命中留下阳光[03:54.82]陪你走过那山高水长[03:59.81]陪你一起生长[04:05.20]这一生在你的风景里[04:10.84]我是谁[re:Made by LrcHelper @https://github.com/ludoux/lrchelper][ve:2.2.0.0]"
+        },{
+            title:"椿",
+            author:"沈以诚",
+            url: "http://music.163.com/song/media/outer/url?id=479598964.mp3",
+            pic:"http://p2.music.126.net/CpwIPy2YUWC6ksF88eGNyw==/109951162931819035.jpg?param=300y300",
+            lrc:"[By:疯悬][00:00.30]恍惚间 浸透了回忆[00:04.99]漫漫的回忆 存在的回忆[00:10.57]只看见 遗忘的笑脸[00:13.87]纯洁的笑脸不在身边[00:19.44]想实现 从前的诺言[00:22.61]不轻的诺言 和你的诺言[00:27.91]却描绘 无期限的诗[00:31.50]由寓意的诗刻画的线[00:36.75]乔木落叶 告诉我时间变迁[00:41.51]你仍旧倚靠石头看岁岁年年[00:45.93]惊觉两鬓霜白长叹一声哀怨[00:50.48]也不过匆匆弹指间[00:54.41]不在意我存在你心里面[00:58.60]只记得当时没有那么远[01:03.31]一眼朝如青丝暮成雪[01:07.65]美梦惊你不在眼前[01:12.32]我想给你一颗我的眼[01:16.25]倒映着曾拾起的缘[01:20.91]若皆是一场镜花水月[01:24.89]也不想忘记你的颜[01:29.03]唯一心愿[01:35.57][01:47.14]恍惚间 浸透了回忆[01:50.49]漫漫的回忆 存在的回忆[01:55.82]只看见 遗忘的笑脸[01:58.96]纯洁的笑脸不在身边[02:04.56]想实现 从前的诺言[02:07.82]不轻的诺言 和你的诺言[02:13.18]却描绘 无期限的诗[02:16.64]由寓意的诗刻画的线[02:21.88]乔木落叶 告诉我时间变迁[02:26.39]你仍旧倚靠石头看岁岁年年[02:30.79]惊觉两鬓霜白长叹一声哀怨[02:35.04]也不过匆匆弹指间[02:39.08]不在意我存在你心里面[02:43.22]只记得当时没有那么远[02:47.66]一眼朝如青丝暮成雪[02:51.90]美梦惊你不在眼前[02:56.85]我想给你一颗我的眼[03:00.69]倒映着曾拾起的缘[03:05.03]若皆是一场镜花水月[03:09.26]也不想忘记你的颜[03:13.26]唯一心愿[re:Made by LrcHelper @https://github.com/ludoux/lrchelper][ve:2.2.0.0]"
+        },{
+            title: "生存指南",
+            author: "Shang",
+            url: "http://music.163.com/song/media/outer/url?id=1351752763.mp3",
+            pic: "http://p1.music.126.net/Y97tq9q78aY0K4mxj7Z6ZA==/109951163923817753.jpg?param=300y300",
+            lrc:"[By:sunN7-L][00:04.00]编曲：王楠之/Shang[00:06.00]吉他：王楠之[00:08.00]和声：王楠之[00:10.00]手鼓：Shang[00:11.72][00:11.72]习惯在午后 一个人听点播 [00:16.82]朋友们的生活 好像没有我 [00:22.59]放轻松 这感觉不是没有过 [00:28.77]怎么连我 都有点难过 [00:33.69]说话的时候 也不能太轻松 [00:39.17]先要掩盖失落 还要显得幽默 [00:44.72]我随便说说 不然你会嘲笑我 [00:51.03]连抱歉都没学过 [00:55.67][00:55.67]难道说 这叫做自由坠落 [01:01.84]那些说不完的唱不够的都把我淹没 [01:07.41]好不容易 让她有一点感动 [01:12.26]就让我从头来过[01:17.45]我也听说 失去过才算拥有 [01:23.83]那些看不透的尽头还有我 [01:28.86]他们口中说的 没有结果的等候 [01:34.31]也许是我 [02:01.38][02:01.38]感情的路口 难免有些差错 [02:07.61]不要慌张失措 才不会太落魄[02:13.00]微微一笑而过 处理的坦然自若[02:18.50]最好再像我 顺便写首情歌[02:24.02]不想说太多 难免有些啰嗦[02:29.41]如果感到困惑 随时为你点播[02:34.91]如果没有结果 哦不一定是我的错[02:41.27]也许是你 在闪躲[02:46.11][02:46.11]难道说 这叫做自由坠落[02:52.24]那些说不完的唱不够的都把我淹没[02:57.68]好不容易 让她有一点感动[03:02.41]就让我从头来过[03:07.73]我也听说 失去过才算拥有[03:14.30]那些看不透的尽头还有我[03:19.06]他们口中说的 没有结果的等候[03:24.70]也许是我 [03:30.30][03:30.32]难道说 这叫做自由坠落[03:36.33]那些说不完的唱不够的都把我淹没[03:41.81]好不容易 让她有一点感动[03:46.68]就让我从头来过[03:51.65]我也听说 失去过才算拥有[03:58.40]那些看不透的尽头还有我[04:03.36]他们口中说的 没有结果的等候[04:08.84]也许是我[04:14.43]他们口中说的 没有结果的等候[04:21.20]也许是我[re:Made by LrcHelper @https://github.com/ludoux/lrchelper][ve:2.2.0.0]"
+        },{
+            title:"独居男子",
+            author:"沈以诚",
+            url: "http://music.163.com/song/media/outer/url?id=1347692190.mp3",
+            pic:"http://p1.music.126.net/1iLwRvMtUMYLZUNR-HQW7Q==/109951163957708692.jpg?param=300y300",
+            lrc:"[00:17.94]编曲 : 陈飙 陈陈陈[00:20.68][00:23.93]起床后睡眼惺忪像漫画中那张呆板的脸[00:33.43]领带要整齐毕竟公司回家地铁还要换线[00:44.18]有些热闹想看却又表现得视而不见[00:53.43]到了晚上一个人想起那些深深浅浅[01:00.18][01:00.68]那些喜欢不起来的是非论对错的幻觉[01:07.18]绵延不绝[01:10.18]坐在角落耗时间低头发现自己很早就[01:16.68]不抽烟[01:19.43]仔细生活每天紧张地呼吸着每个气味[01:25.93]不算完美[01:28.93]刻意遗忘生病遗忘那些过去清醒度日[01:35.38]如流年[01:36.88]才不看你的照片[01:41.63]你最好离我远点[01:48.13][02:02.88]早餐是牛奶油条苹果再加个鸡蛋要两面煎[02:12.13]午餐吃汉堡可乐明天体脂会不会高一些[02:22.88]晚餐回家楼下面馆咽两口对付一点[02:32.38]夜宵炸鸡想点一份算了吧别破戒[02:39.38][02:39.63]藏身公寓里面总比在城市疯狂地冒险[02:45.88]来的安全[02:48.88]尽情放纵一夜较之躺在房间床上睡眠[02:55.38]更肤浅[02:58.38]仔细生活每天紧张地呼吸着每个气味[03:04.88]不算完美[03:07.63]刻意遗忘生病遗忘那些过去清醒度日[03:14.13]如流年[03:15.63]才不看你的照片[03:20.63]你最好离我远点[03:25.13]才不看你的照片[03:30.13]你最好离我远点[03:35.38][03:35.88]早看透你的小观点对着我的大观念全部[03:42.38]都是表演[03:45.13]倒不如早些成全你大摇大摆的在酒馆里[03:52.13]吞云吐烟[03:54.88]仔细生活每天紧张地呼吸着每个气味[04:01.38]不算完美[04:04.13]刻意遗忘生病遗忘那些过去清醒度日[04:10.63]如流年[04:12.13]才不要和你见面[04:16.90]宁愿一辈子失眠[04:21.90]不要和你见面[04:26.40]宁愿一辈子失眠[04:32.96][04:33.84]企划 : 小粉[04:34.84]统筹 : 黄鲲[04:35.60]监制 : moonik蛛蛛[04:36.60]制作人 : 陈陈陈[04:38.60]吉他 : 许晓冬[04:39.60]贝斯 : Eli Levi[04:40.34]录音 : 陈陈陈 阿杜 陈飙[04:41.95]混音 : 李天衣[04:42.84]封面设计 : 武中奇[04:42.95]母带 : 李天衣[99:00.01]本歌曲来自〖网易音乐人〗[99:00.02]10亿现金激励，千亿流量扶持！[99:00.03]合作：st399@vip.163.com [re:Made by LrcHelper @https://github.com/ludoux/lrchelper][ve:2.2.0.0]"
+        },{
+            title:"Love Is Gone",
+            author:"SLANDER / Dylan Matthew",
+            url: "http://music.163.com/song/media/outer/url?id=1401671455.mp3",
+            pic:"http://p1.music.126.net/E5JYsO4DR4_Y-CdidpUVCw==/109951164473460772.jpg?param=300y300",
+            lrc:"[By:是非又欲/九九Lrc歌词网～www.99Lrc.net][Ti:][Ar:][Al:][00:00.00][00:13.59]Don't go tonight#今夜请别离去[00:18.45]Stay here one more time#再为我驻足一次[00:21.84]Remind me what it's like#时刻提醒着我曾经的美好[00:26.60]And let's fall in love one more time#就让我们再次坠入爱河[00:33.92]I need you now by my side#此刻我需要你的陪伴[00:40.64]It tears me up when you turn me down#你的拒绝让我的心支离破碎[00:47.76]I'm begging please, just stick around#我祈求着你，请别离去[00:54.98][00:55.20]I'm sorry, don't leave me, I want you here with me[00:56.20]抱歉，请不要离开我，此刻我只想你陪着我[01:02.08]I know that your love is gone#尽管我明白你的爱已经消逝殆尽[01:08.85]I can't breathe, I'm so weak, I know this isn't easy[01:09.85]我无法呼吸，脆弱不堪，我知道接受事实的不易[01:15.79]Don't tell me that your love is gone[01:16.79]别亲口对我说你的爱已经消失殆尽[01:20.42]That your love is gone#你的爱已经消失殆尽[01:23.57][01:29.43]Don't tell me that your love is gone[01:30.43]但是请别亲口对我说你的爱已经消失殆尽[01:34.08]That your love is gone#你的爱已经消失殆尽[01:38.38][01:49.99]I'm sorry, don't leave me, I want you here with me[01:50.99]抱歉，请不要离开我，此刻我只想你陪着我[01:56.90]I know that your love is gone#尽管我明白你的爱已经消逝殆尽[02:03.73]I can't breathe, I'm so weak, I know this isn't easy[02:04.73]我无法呼吸，脆弱不堪，我知道接受事实的不易[02:14.17]Don't tell me that your love is gone[02:15.17]别亲口对我说你的爱已经消失殆尽[02:18.78]That your love is gone#你的爱已经消失殆尽[02:24.26][02:25.56]That your love is gone#你的爱已经消失殆尽[02:29.74][02:34.67]I can't breathe, I'm so weak, I know this isn't easy[02:35.67]我无法呼吸，脆弱不堪，我知道接受事实的不易[02:42.30]Don't tell me that your love is gone[02:43.30]别亲口对我说你的爱已经消失殆尽[02:48.11]That your love is gone#你的爱已经消失殆尽[02:52.32][re:Made by LrcHelper @https://github.com/ludoux/lrchelper][ve:2.2.0.0]"
+        },{
+            title:"Meet Again",
+            author:"Faruk Sabanci / Axel",
+            url:"http://music.163.com/song/media/outer/url?id=516819102.mp3",
+            pic:"http://p2.music.126.net/8TX6LUYg0s6lBhU15dXDKw==/109951163057082505.jpg?param=300y300",
+            lrc:"[By:Echo木杉][00:15.88]Stars in your eyes#透过你星辰闪烁的双眸[00:18.57]I'm looking for the scars that you hide#寻找你隐藏内心的伤痛[00:23.96]You're just like me#你我皆相同[00:26.58]So human, but so lost underneath#深谙世事 却深藏迷茫[00:31.34]And I'm yours#我属于你[00:35.69]But don't know what this is going#但不知此情何往[00:39.30]I'm yours#你拥有我[00:43.72]But where will we be tomorrow?#而明天我们将身处何方？[00:47.26]You say don't go#你说不要走[00:48.55]Don't go#别放手[00:49.60]Don't go#请停留[00:50.65]Don't go#共守候[00:51.71]Don't go#永远[00:53.68]Away#不离不弃[00:55.20]Cause I don't know#因为不知道[00:56.58]Don't know#不确定[00:57.63]Don't know#不愿想[00:58.62]Don't know#不敢想[00:59.63]Don't know #难预料[01:01.52]If we#我们是否[01:02.79]will meet again#有缘再见[01:04.55][01:35.82]Freezing tonight#今晚寒风刺骨[01:38.72]You're shivering but I'll hold you tight[01:39.72]你瑟瑟发抖 但我会将你紧拥怀中[01:43.81]For I was numb#不知不觉[01:46.66]That's how long I have known you #我已爱你良久[01:48.77]But you know#你知道[01:51.47]I'm yours#我属于你[01:55.72]But don't know what this is going#但不知此情何往[01:59.35]I'm yours#你拥有我[02:03.72]But where will we be tomorrow?#而明天我们将身处何方？[02:07.32]You say don't go#你说不要走[02:08.58]Don't go#别放手[02:09.62]Don't go#请停留[02:10.62]Don't go#共守候[02:11.62]Don't go#永远[02:13.60]Away#不离不弃[02:15.22]Cause I don't know#因为不知道[02:16.61]Don't know#不确定[02:17.64]Don't know#不愿想[02:18.73]Don't know#不敢想[02:19.80]Don't know #难预料[02:21.56]If we#我们是否[02:23.00]will meet again#有缘重逢[02:24.20][02:51.40]Meet again#再次邂逅[02:55.25]You say don't go#你说不要走[02:56.60]Don't go#别放手[02:57.61]Don't go#请停留[02:58.61]Don't go#共守候[02:59.61]Don't go#永远[03:01.57]Away#不离不弃[03:03.35]Cause I don't know#因为不知道[03:04.66]Don't know#不确定[03:05.71]Don't know#不愿想[03:06.74]Don't know#不敢想[03:07.68]Don't know #难预料[03:09.75]If we#我们是否[03:10.95]will meet again#有缘再见[re:Made by LrcHelper @https://github.com/ludoux/lrchelper][ve:2.2.0.0]"
+        },{
+            title:"Home We'll Go (Take My Hand)",
+            author:"Steve Aoki / Walk off the Earth",
+            url:"http://music.163.com/song/media/outer/url?id=31877683.mp3",
+            pic:"http://p2.music.126.net/LcYyPADajsWWmh3Qt1pKtg==/17937432695801647.jpg?param=300y300",
+            lrc:"[By:紫ha123][Ar:steve aoki、walk off the earth][Ti:Take My Hand][00:08.79]Don't let your head hang low#不要将你的头深深低垂[00:14.75]You've seen the darkest skies I know#我知道你曾看见过最暗的星空[00:19.03]Let your heart run child like horses in the wild[00:20.03]少年，敞开你的心扉，一如奔驰在旷野的骏马[00:25.82]So take my hand and home we'll go#握着我的手，让我们一起回家[00:31.63]The sun it glows like gold#看这阳光明媚，绚烂如金[00:38.02]Feeling warm as a burning coal#温暖如火[00:42.12]Let your soul shine bright like diamonds in the sky[00:43.12]点亮你的心坎，好似钻石当空[00:48.91]So take my hand and home we'll go#牵着我的手，我们一起回家[00:54.81]Home we'll go, home we'll go#我们回家吧，我们一起回家[01:02.77]Home we'll go, home we'll go#我们回家吧，我们一起回家[01:34.92]Home we'll go, home we'll go#我们回家吧，我们一起回家[01:42.70]Home we'll go, home we'll go#我们回家吧，我们一起回家[01:59.01]Don't let your head hang low#不要将你的头深深低垂[02:04.71]You've seen the darkest skies I know#我知道你曾看见过最暗的星空[02:08.95]Let your heart run child like horses in the wild[02:09.95]骚年，敞开你的心扉，一如奔驰在旷野的骏马[02:15.86]So take my hand and home we'll go#握着我的手，让我们一起回家[02:22.01]The sun it glows like gold#看这阳光明媚，绚烂如金[02:28.04]Feeling warm as a burning coal#温暖如火[02:32.11]Let your soul shine bright like diamonds in the sky[02:33.11]点亮你的心坎，好似钻石当空[02:38.88]So take my hand and home we'll go#牵着我的手，我们一起回家[02:44.70]Home we'll go, home we'll go#我们回家吧，我们一起回家[02:52.09]Home we'll go, home we'll go#我们回家吧，我们一起回家[03:24.92]Home we'll go, home we'll go#我们回家吧，我们一起回家[03:32.37]Home we'll go, home we'll go#我们回家吧，我们一起回家[03:58.99]Don't let your head hang low#不要将你的头深深低垂[04:04.89]You've seen the darkest skies I know#我知道你曾看见过最暗的星空[04:08.96]Let your heart run child like horses in the wild[04:09.96]骚年，敞开你的心扉，一如奔驰在旷野的骏马[04:15.91]So take my hand and home we'll go#握着我的手，让我们一起回家[04:21.95]Home we'll go, home we'll go#我们回家吧，我们一起回家[04:29.92]Home we'll go, home we'll go#我们回家吧，我们一起回家[04:37.58]Home we'll go, home we'll go#我们回家吧，我们一起回家[04:45.85]Home we'll go, home we'll go#我们回家吧，我们一起回家[re:Made by LrcHelper @https://github.com/ludoux/lrchelper][ve:2.2.0.0]"
+        },{
+            title:"Touch",
+            author:"3LAU / Carly Paige",
+            url:"http://music.163.com/song/media/outer/url?id=534228257.mp3",
+            pic:"http://p2.music.126.net/c4Vv7JNgfccthP4cAStu7A==/109951163154409031.jpg?param=300y300",
+            lrc:"[By:hondoes][00:08.47]No talk, seven days#一言不发，整整七天[00:10.68]Dead air, empty space#死气沉沉，空空荡荡[00:13.61]Is this where we are now?#这就是我们的状态吗？[00:17.28]Would call, but I don't#本来可以打电话，但是我不愿意[00:19.42]You could, but you won't#你也可以，但是你却没有那样做[00:22.40]Cause it's been too long now#因为现在已经太长时间了[00:24.91][00:26.22]I know that it happens#我知道有一些事情的确会发生[00:28.51]People they grow apart but#人与人之间会逐渐产生隔阂[00:30.51]I never imagined#但我从来没有想过[00:32.18]It'd happen to us#这会发生在我们身上[00:34.21]Cause I knew you so well#因为我很了解你[00:36.88]Better than myself#胜过了解我自己[00:39.75]But everything's changed now#但一切都有变了[00:42.22][00:42.23]Do you feel it?#你感觉到了吗[00:44.51]Drifting slowly down#慢慢向下坠落[00:46.89]Do you feel it?#你感觉到了吗[00:49.16]Do you feel it?#你感觉到了吗[00:51.06]All this distance#这遥远的距离[00:53.19]I've been reaching out#我伸手想要触碰[00:55.66]Do you feel it?#你感觉到了吗[00:57.80]Do you feel the way we're falling outta touch?[00:58.80]你感觉到了我们逐渐失去联系了吗[01:01.54][01:13.44]Do you feel it?#你感觉到了吗[01:15.27]Do you feel the way we're falling outta touch?[01:16.27]你感觉到了我们逐渐失去联系了吗[01:30.55]Do you feel it?#你感觉到了吗[01:32.70]Do you feel the way we're falling outta touch?[01:33.70]你感觉到了我们逐渐失去联系了吗[01:36.48][01:44.52]Long days, busy lives#漫长的日子，忙碌的生活[01:46.67]Just can't find the time#找不到空余的时间[01:49.64]Keep making excuses#不断寻找借口[01:53.17]Would call, but I don't#本来可以打电话，但是我不愿意[01:55.36]You could, but you won't#你也可以，但是你却没有那样做[01:58.34]We've gotten use to it#我们已经习惯了这样[02:00.90][02:02.23]I know that it happens#我知道有一些事情的确会发生[02:04.49]People they grow apart but#人与人之间会逐渐产生隔阂[02:06.55]I never imagined#但我从来没有想过[02:08.21]It'd happen to us#这会发生在我们身上[02:10.17]Cause I knew you so well#因为我很了解你[02:12.83]Better than myself#胜过了解我自己[02:15.54]Better than myself#胜过了解我自己[02:17.57][02:18.30]Do you feel it?#你感觉到了吗[02:20.46]Drifting slowly down#慢慢向下坠落[02:22.88]Do you feel it?#你感觉到了吗[02:25.11]Do you feel it?#你感觉到了吗[02:27.00]All this distance#这遥远的距离[02:29.22]I've been reaching out#我伸手想要触碰[02:31.57]Do you feel it?#你感觉到了吗[02:33.74]Do you feel the way we're falling outta touch?[02:34.74]你感觉到了我们逐渐失去联系了吗[02:37.49][02:49.09]Do you feel it?#你感觉到了吗[02:51.34]Do you feel the way we're falling outta touch?[02:52.34]你感觉到了我们逐渐失去联系了吗[03:06.52]Do you feel it?#你感觉到了吗[03:08.68]Do you feel the way we're falling outta touch?[03:09.68]你感觉到了我们逐渐失去联系了吗[03:12.21][re:Made by LrcHelper @https://github.com/ludoux/lrchelper][ve:2.2.0.0]"
+        },{
+            title:"Where Is The Love?",
+            author:"Clément Bcx / Black Eyed Peas / Ellena Soule / Soule",
+            url:"http://music.163.com/song/media/outer/url?id=34144434.mp3",
+            pic:"http://p1.music.126.net/knXuA0rAKFg9eViip-NaGQ==/7783442814172824.jpg?param=300y300",
+            lrc:"[By:nemo0225][00:35.34]People killin' People dyin'#人们在杀戮中死亡[00:37.53]Children hurt and you hear them crying#你可听见孩子受伤地哭泣[00:39.76]Can you practice what you preach#你是言而必行[00:41.85]Or would you turn the other cheek#还是逆来顺受[00:44.11]Father father father, help us#主啊，请帮助我们[00:46.32]Send some guidance from above#指引我们前进[00:46.97]Cause right now people have me questionin'#因为世人开始疑惑[00:48.87]Where is the love?#爱在何处[00:51.84]The love#LOVE[00:54.58]The love#LOVE[00:56.77]Where is the love, the love, my love?#何处是爱，是爱，爱[00:58.35]Where is the love?#爱在何处[01:02.78]Where is the love?#爱在何处[01:04.97]Where is the love, the love, my love?#何处是爱，是爱，爱[01:07.08]What's wrong with the world, mama?#我们的世界怎么了妈妈[02:38.98]People livin' like they ain't got no mamas#人们生活得像没有妈妈[02:40.45]I think the whole world's addicted to the drama[02:41.45]整个世界像是沉溺于戏剧[02:42.61]Only attracted to the things that'll bring the trauma[02:43.61]人们醉心于伤害[02:44.76]Overseas ya we tryin' to stop terrorism[02:45.76]我们纵横四海宣称不让恐怖主义抬头[02:47.00]But we still got terrorists here livin'[02:48.00]但还是让恐怖主义在脚下滋生[02:49.08]In the U.S.A, the big C.I.A#就算有着提供安全情报的美国[02:51.30]The bloods and the crips, and the KKK[02:52.30]帮派斗争和三K种族主义还是发生[02:53.68]But if you only got love for your own ways#如果你们只爱自己[02:55.90]Then you only leave space to discriminate#那么世界将充满歧视[02:58.13]To discriminate only generates hate#歧视只会繁衍仇恨[03:00.28]And when you hate, then you're bound to get irate[03:01.28]当你仇恨进而怒气冲冲[03:02.74]Madness is what you demonstrate#人生就会失去理智[03:05.47]And that's exactly how anger works and operates[03:06.47]这就是愤怒如何操控人心[03:07.04]Man ya gotta have love, this'll set us straight[03:08.04]人啊，内心必须要有爱，它能把我们引上正路[03:09.40]Take control of your mind and meditate#调控你的心智[03:11.35]Let your soul gravitate#让你的灵魂指引你[03:13.64]to the love ya'll (to the love ya'll)#找到爱[03:14.88]to the love ya'll (to the love ya'll)#找到爱[03:19.35]to the love ya'll (to the love ya'll)#找到爱[03:23.65]to the love ya'll (to the love ya'll)#找到爱[03:28.03]People killin' People dyin'#人们在杀戮中死亡[03:32.44]Children hurt and you hear them crying#你可听见孩子受伤地哭泣[03:34.73]Can you practice what you preach#你是言而必行[03:36.88]Or would you turn the other cheek#还是逆来顺受[03:39.03]Father father father, help us#主啊，请帮助我们[03:41.27]Send some guidance from above#指引我们前进[03:43.30]Cause right now people have me questionin'#因为世人开始疑惑[03:45.38]Where is the love?#爱在何处[03:48.38]The love#LOVE[03:51.54]The love#LOVE[03:53.82]Where is the love, the love, my love?#何处是爱，是爱，爱[03:55.49]Where is the love?#爱在何处[03:59.92]Where is the love?#爱在何处[04:02.10]Where is the love, the love, my love?#何处是爱，是爱，爱[04:04.21][re:Made by LrcHelper @https://github.com/ludoux/lrchelper][ve:2.2.0.0]"
+        }
+        ]
+    });
+    zp2.init();
+</script>
+<script>
+    $('.menu.toggle').click(function () {
+        $('.m-item').toggleClass('m-mobile-hide');
+    });
+</script>
+    <script th:inline="javascript">
+        $("#newblogs-container").load(/*[[@{/footer/newblogs}]]*/"/footer/newblogs");
+        $("#blog-message").load(/*[[@{/footer/blogMessage}]]*/"/footer/blogMessage");
+    </script>
+<script>  //博客运行时间
+function secondToDate(second) {
+    if (!second) {
+        return 0;
+    }
+    var time = new Array(0, 0, 0, 0, 0);
+    if (second >= 365 * 24 * 3600) {
+        time[0] = parseInt(second / (365 * 24 * 3600));
+        second %= 365 * 24 * 3600;
+    }
+    if (second >= 24 * 3600) {
+        time[1] = parseInt(second / (24 * 3600));
+        second %= 24 * 3600;
+    }
+    if (second >= 3600) {
+        time[2] = parseInt(second / 3600);
+        second %= 3600;
+    }
+    if (second >= 60) {
+        time[3] = parseInt(second / 60);
+        second %= 60;
+    }
+    if (second > 0) {
+        time[4] = second;
+    }
+    return time;
+}
+function setTime() {
+    /*此处为网站的创建时间*/
+    var create_time = Math.round(new Date(Date.UTC(2021, 0, 22, 0, 0, 0)).getTime() / 1000);
+    var timestamp = Math.round((new Date().getTime() + 8 * 60 * 60 * 1000) / 1000);
+    currentTime = secondToDate((timestamp - create_time));
+    currentTimeHtml = currentTime[0] + '年' + currentTime[1] + '天'
+        + currentTime[2] + '时' + currentTime[3] + '分' + currentTime[4]
+        + '秒';
+    document.getElementById("Runtime").innerHTML = currentTimeHtml;
+}
+setInterval(setTime, 1000);
+</script>
+</body>
+</html>
